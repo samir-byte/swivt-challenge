@@ -11,3 +11,22 @@ exports.getRepositoriesController = catchAsync(async (req,res) => {
         ...data
     })
 })
+
+exports.getRepositoryController = catchAsync(async(req, res) => {
+    const {owner, repo} = req.query
+    const url = `${process.env.GITHUB_BASE_URL}/repos/${owner}/${repo}`
+    const data = await githubServices.getRepository(url)
+    res.status(200).json({
+        status: 'success',
+        ...data
+    })
+})
+
+exports.getMarkupController = catchAsync(async (req,res)=> {
+    const {owner, repo, branch} = req.query
+    const url = `${process.env.MARKUP_BASE_URL}/${owner}/${repo}/${branch}/README.md`
+    const data = await githubServices.getMarkup(url)
+    res.status(200).send({
+        data
+    })
+})

@@ -32,3 +32,47 @@ exports.getRepositories = async(url) => {
         return err
     }
 };
+
+exports.getMarkup = async(url) => {
+    try{
+        const headers = {
+            'Content-type': 'application/json'
+        }
+        const response = await dataServices.getData(url,headers)
+        
+        const data = await response.text()
+        console.log(data,"markup response")
+        return data
+    }
+    catch(err) {
+        return err
+    }
+}
+
+exports.getRepository = async(url) => {
+    console.log("url",url)
+    try{
+        const headers = {
+            'Content-type': 'application/json'
+        }
+        const response = await dataServices.getData(url,headers)
+        const json = await response.json()
+        console.log(json,"data")
+        return {
+            owner: {
+                name: json.owner.login,
+                link: json.owner.html_url
+            },
+            repository: {
+                name: json.name,
+                link: json.html_url
+            },
+            open_issues: json.open_issues_count,
+            default_branch: json.default_branch
+        }
+    }
+    catch(err){
+        console.log(err)
+        return err
+    }
+};
