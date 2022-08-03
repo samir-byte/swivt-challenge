@@ -1,17 +1,21 @@
-import { Header,Card } from "../components"
+import { Header,Card,Alert, Paginator } from "../components"
+import { useState } from "react";
 
 const Landing = () => {
 
-
+    const [isLoaded, setisLoaded] = useState(true);
     return(
         <div className="container">
-            <nav>
+            <nav className="mb-3">
                 <Header/>
             </nav>
-            <div className="container mt-3">
+            {isLoaded ? (
+                <div className="container mt-3">
                 <div className="row">
                     <div className="col-sm">
                         <h4>Repositories: 2022 Results</h4>
+                        <Card />
+                        
                     </div>
                     <div className="col-sm">
                         <select className="form-control">
@@ -23,7 +27,15 @@ const Landing = () => {
                         </select>
                     </div>
                 </div>
+                <Paginator/>
             </div>
+            ):(
+                <Alert 
+                    alertType="danger"
+                    alertText="Please search above"
+                />
+            )}
+            
         </div>
     )
 }
