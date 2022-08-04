@@ -2,8 +2,11 @@ import React, {useState} from 'react';
 
 const initialState = {
     isLoaded: false,
+    query: '',
+    sort: 'best-match',
     error: null,
-    data: []
+    data: [],
+    totalCount: 0
 }
 
 export const AppContext = React.createContext();

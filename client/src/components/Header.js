@@ -1,15 +1,36 @@
-import { useState} from 'react';
 import { searchRepo } from '../services';
-const Header = () => {
-    const [query, setQuery] = useState('');
-    
-    const handleclick = async() => {
-        console.log(query);
-        if(query){
-            let data = await searchRepo(query,1,'best-match');
-            console.log(data);
-            
+import { AppContext } from "../context/appContext";
+import { useContext } from "react";
 
+const Header = () => {
+    const {state, setState} = useContext(AppContext);
+    const { query } = state;
+    const handleclick = async() => {
+        if(query){
+            try{
+                let data = await searchRepo(query,1,'best-match');
+                console.log(data.status,"data status");
+                if(data.status == 'error' || data.status == 'fail'){
+                    console.log("ERROR")
+                    setState({
+                        ...state,
+                        error: data.message
+                    })
+                }
+                else{
+                    console.log("NOT AN ERROR")
+                    setState({
+                        ...state,
+                        isLoaded: true,
+                        data: data.items,
+                        totalCount: data.total_count
+                    })
+                }
+                
+            }
+            catch(err){
+                console.log(err);
+            }
         }
         
     }
@@ -20,9 +41,7 @@ const Header = () => {
                 type="text" 
                 className="form-control" 
                 placeholder="Search ..." 
-                onChange={(e) => {
-                    setQuery(e.target.value)
-                }}
+                onChange={(e) => setState({...state, query: e.target.value})}
               ></input>
               </div>
               <div className="col-sm">

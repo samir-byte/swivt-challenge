@@ -9,7 +9,7 @@ function App() {
     <BrowserRouter>
       <Routes>
       <Route path="/" element={<Landing/>} />
-      <Route path="/:owner/:repo" element={<Details/>} />
+      <Route path="/repository/:owner/:repo" element={<Details/>} />
       <Route path="*" element={<Error/>} />
       </Routes>
     </BrowserRouter>

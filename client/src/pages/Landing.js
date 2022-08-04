@@ -6,19 +6,18 @@ const Landing = () => {
 
     const {state, setState} = useContext(AppContext);
     console.log(state);
-    const { data, isLoaded, error } = state;
+    const { data, isLoaded, error, totalCount } = state;
+    const pageCount = Math.ceil(totalCount / 10);
     return(
         <div className="container">
-            <nav className="mb-3">
+            <nav className="my-5">
                 <Header/>
             </nav>
             {isLoaded ? (
                 <div className="container mt-3">
-                <div className="row">
-                    <div className="col-sm">
-                        <h4>Repositories: 2022 Results</h4>
-                        <Card />
-                        
+                    <div className="row">
+                        <div className="col-sm">
+                    <h4>Repositories: {totalCount} Results</h4>
                     </div>
                     <div className="col-sm">
                         <select className="form-control">
@@ -29,8 +28,19 @@ const Landing = () => {
                             <option value="help-wanted-issues">Help wanted</option>
                         </select>
                     </div>
-                </div>
-                <Paginator/>
+                    </div>
+                {/* <div className="row mt-3"> */}
+                    <div className="row justify-content-md-center mt-3">
+                        {data.map((repo) => {
+                            return (
+                                <Card key={repo.id} repo={repo}/>
+                            )
+                        })}
+                    </div>
+                {/* </div> */}
+                <Paginator
+                    pageCount={pageCount}
+                />
             </div>
             ):(
                 <Alert 

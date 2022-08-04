@@ -1,3 +1,4 @@
+const AppError = require("../utils/appError");
 const dataServices = require("./sharedServices")
 
 exports.getRepositories = async(url) => {
@@ -28,8 +29,7 @@ exports.getRepositories = async(url) => {
         }
     }
     catch(err){
-        console.log(err)
-        return err
+        throw new AppError('Internal server error',500)
     }
 };
 
@@ -45,7 +45,7 @@ exports.getMarkup = async(url) => {
         return data
     }
     catch(err) {
-        return err
+        throw new AppError('Internal server error',500)
     }
 }
 
@@ -73,6 +73,6 @@ exports.getRepository = async(url) => {
     }
     catch(err){
         console.log(err)
-        return err
+        throw new AppError('Internal server error',500)
     }
 };
