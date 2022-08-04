@@ -1,13 +1,40 @@
 import { Header,Card,Alert, Paginator } from "../components"
+import { searchRepo } from "../services";
 import { AppContext } from "../context/appContext";
 import { useContext } from "react";
 
 const Landing = () => {
 
     const {state, setState} = useContext(AppContext);
-    console.log(state);
-    const { data, isLoaded, error, totalCount } = state;
+    const { data, isLoaded, error, totalCount, query } = state;
+
+    //page count on total data
     const pageCount = Math.ceil(totalCount / 10);
+
+    const handleSelect = async(e) => {
+        console.log(e.target.value,"Sort")
+        let sort = e.target.value
+        try{
+            let data = await searchRepo(query,1,sort)
+            console.log(data,"data")
+            setState({
+                ...state,
+                data:data.items,
+                isLoaded: true,
+                sort: sort
+            })
+        }
+        catch(err){
+            console.log(err)
+            setState({
+                ...state,
+                isLoaded:false,
+                error:err.message
+            })
+        }
+        
+    }
+
     return(
         <div className="container">
             <nav className="my-5">
@@ -20,7 +47,7 @@ const Landing = () => {
                     <h4>Repositories: {totalCount} Results</h4>
                     </div>
                     <div className="col-sm">
-                        <select className="form-control">
+                        <select className="form-control" onChange={handleSelect}>
                             <option>Sort By: Best match</option>
                             <option value="stars">Stars</option>
                             <option value="forks">Forks</option>
