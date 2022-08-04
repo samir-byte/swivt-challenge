@@ -1,12 +1,14 @@
 const AppError = require("../utils/appError");
 const dataServices = require("./sharedServices")
 
-exports.getRepositories = async(url) => {
+//search repositories service
+exports.searchRepositories = async(url) => {
     console.log("url",url)
     try{
         const headers = {
             'Content-type': 'application/json'
         }
+        // calling shared service to fetch from server
         const response = await dataServices.getData(url,headers)
         const json = await response.json()
         console.log(json,"data")
@@ -33,6 +35,7 @@ exports.getRepositories = async(url) => {
     }
 };
 
+// get markup service
 exports.getMarkup = async(url) => {
     try{
         const headers = {
@@ -49,6 +52,7 @@ exports.getMarkup = async(url) => {
     }
 }
 
+//get repository detail service
 exports.getRepository = async(url) => {
     console.log("url",url)
     try{

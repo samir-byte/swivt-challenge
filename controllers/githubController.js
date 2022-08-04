@@ -1,11 +1,19 @@
 const catchAsync = require("../utils/catchAsync");
 const githubServices = require("../services/githubServices");
 const AppError = require("../utils/appError");
-// https://api.github.com/search/repositories?q=repo1&page=1&per_page=10&sort=stars
-exports.getRepositoriesController = catchAsync(async (req,res,next) => {
+
+/* 
+search repositories controller
+@params req, res, next
+@req queryString, page, per_page, sortString
+@res data items with repositories
+*/
+exports.searchRepositories = catchAsync(async (req,res,next) => {
     const {queryString, page, per_page, sortString} = req.query
     const url = `${process.env.GITHUB_BASE_URL}/search/repositories?q=${queryString}&page=${page}&per_page=${per_page}&sort=${sortString}`
-    const data = await githubServices.getRepositories(url)
+    
+    // calling searchRepositories service
+    const data = await githubServices.searchRepositories(url)
     
     console.log(data,"Response from github")
     if(data.status == 'error' || data.status == 'fail'){
@@ -18,6 +26,7 @@ exports.getRepositoriesController = catchAsync(async (req,res,next) => {
  
 })
 
+//get repository details controller
 exports.getRepositoryController = catchAsync(async(req, res) => {
     const {owner, repo} = req.query
     const url = `${process.env.GITHUB_BASE_URL}/repos/${owner}/${repo}`
@@ -28,6 +37,7 @@ exports.getRepositoryController = catchAsync(async(req, res) => {
     })
 })
 
+//get markup readme.md content controller
 exports.getMarkupController = catchAsync(async (req,res)=> {
     const {owner, repo, branch} = req.query
     const url = `${process.env.MARKUP_BASE_URL}/${owner}/${repo}/${branch}/README.md`

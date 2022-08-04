@@ -12,7 +12,7 @@ process.on('uncaughtException', err => {
 
 console.log(`Environment: ${process.env.NODE_ENV}`);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 //Server start
 const server = app.listen(port, () => {
     console.log(`Example app listening on port ${port}!`)
