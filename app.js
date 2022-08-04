@@ -1,4 +1,5 @@
 var express = require('express')
+var cors = require('cors')
 const morgan = require('morgan')
 
 const AppError = require('./utils/appError')
@@ -7,6 +8,8 @@ const globalErrorHandler = require('./controllers/errorController')
 const routeManager = require('./routes')
 
 var app = express()
+
+app.use(cors())
 
 //middleware morgan for development
 if(process.env.NODE_ENV === 'development') {

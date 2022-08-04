@@ -1,9 +1,12 @@
 import { Header,Card,Alert, Paginator } from "../components"
-import { useState } from "react";
+import { AppContext } from "../context/appContext";
+import { useContext } from "react";
 
 const Landing = () => {
 
-    const [isLoaded, setisLoaded] = useState(true);
+    const {state, setState} = useContext(AppContext);
+    console.log(state);
+    const { data, isLoaded, error } = state;
     return(
         <div className="container">
             <nav className="mb-3">
