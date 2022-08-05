@@ -1,4 +1,4 @@
-import { Header,Card,Alert, Paginator } from "../components"
+import { Header,Card,Blank, Paginator } from "../components"
 import { searchRepo } from "../services";
 import { AppContext } from "../context/appContext";
 import { useContext } from "react";
@@ -40,6 +40,7 @@ const Landing = () => {
             <nav className="my-5">
                 <Header/>
             </nav>
+            <hr/>
             {isLoaded ? (
                 <div className="container mt-3">
                     <div className="row">
@@ -70,10 +71,7 @@ const Landing = () => {
                 />
             </div>
             ):(
-                <Alert 
-                    alertType="danger"
-                    alertText="Please search above"
-                />
+                <Blank/> 
             )}
             
         </div>

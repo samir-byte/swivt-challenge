@@ -41,7 +41,7 @@ const Paginator = (props) => {
         pageRange={2}
         marginPagesDisplayed={3}
         onPageChange={handlePageChange}
-        containerClassName={'pagination mt-3 justify-content-md-center'}
+        containerClassName={'pagination mt-3 mb-3 justify-content-md-center'}
         pageLinkClassName={'page-link'}
         previousClassName={'page-item'}
         previousLinkClassName={'page-link'}

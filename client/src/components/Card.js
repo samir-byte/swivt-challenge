@@ -11,7 +11,7 @@ const Card = (props) => {
     const str = repo.description
     
     return ( 
-        <div className="col-sm-4">
+        <div className="col-sm-4 mt-3">
         <div className="card">
             <div className="card-body">
                 <h5 className="card-title">{repo.name}</h5>
