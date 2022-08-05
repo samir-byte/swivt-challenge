@@ -9,16 +9,16 @@ const Header = () => {
         if(query){
             try{
                 let data = await searchRepo(query,1,'best-match');
-                console.log(data.status,"data status");
+                // console.log(data.status,"data status");
                 if(data.status == 'error' || data.status == 'fail'){
-                    console.log("ERROR")
+                    // console.log("ERROR")
                     setState({
                         ...state,
                         error: data.message
                     })
                 }
                 else{
-                    console.log("NOT AN ERROR")
+                    // console.log("NOT AN ERROR")
                     setState({
                         ...state,
                         isLoaded: true,
@@ -29,7 +29,7 @@ const Header = () => {
                 
             }
             catch(err){
-                console.log(err);
+                // console.log(err);
             }
         }
         

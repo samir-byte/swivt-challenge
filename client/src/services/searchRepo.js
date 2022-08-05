@@ -8,7 +8,7 @@ const searchRepo = async (queryString,page,sort) => {
         return data;
     }
     catch(err){
-        console.log(err);
+        // console.log(err);
     }
     
 }

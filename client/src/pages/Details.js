@@ -21,7 +21,7 @@ const Details = () => {
         
         (async() => {
             const data = await getRepo(owner,repo)
-            console.log(data, "repo data")
+            // console.log(data, "repo data")
             if(data.status == 'error' || data.status == 'fail'){
                 setIsLoaded(false)
             }

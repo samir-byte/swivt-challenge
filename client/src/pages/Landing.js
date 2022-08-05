@@ -12,11 +12,11 @@ const Landing = () => {
     const pageCount = Math.ceil(totalCount / 10);
 
     const handleSelect = async(e) => {
-        console.log(e.target.value,"Sort")
+        // console.log(e.target.value,"Sort")
         let sort = e.target.value
         try{
             let data = await searchRepo(query,1,sort)
-            console.log(data,"data")
+            // console.log(data,"data")
             setState({
                 ...state,
                 data:data.items,
@@ -25,7 +25,7 @@ const Landing = () => {
             })
         }
         catch(err){
-            console.log(err)
+            // console.log(err)
             setState({
                 ...state,
                 isLoaded:false,

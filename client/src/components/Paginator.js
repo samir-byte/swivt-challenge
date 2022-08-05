@@ -7,7 +7,7 @@ import { useContext } from "react";
 
 const Paginator = (props) => {
     const { pageCount } = props;
-    console.log(pageCount,"pageCount");
+    // console.log(pageCount,"pageCount");
     const { state, setState } = useContext(AppContext);
 
     const handlePageChange = (data) => {
@@ -16,7 +16,7 @@ const Paginator = (props) => {
       const sort = state.sort;
       if(query){
         searchRepo(query,page,sort).then(res => {
-          console.log(res)
+          // console.log(res)
           setState({
             ...state,
             isLoaded: true,
