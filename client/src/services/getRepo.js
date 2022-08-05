@@ -8,7 +8,7 @@ const getRepo = async (owner,repo) => {
         return data;
     }
     catch(err){
-        console.log(err);
+        // console.log(err);
     }
     
 }
